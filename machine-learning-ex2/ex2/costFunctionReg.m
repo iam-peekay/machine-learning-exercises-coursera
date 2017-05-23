@@ -18,7 +18,7 @@ grad = zeros(size(theta));
 %               derivatives of the cost w.r.t. each parameter in theta
 
 
-J = (1/m) * sum((-y' * log(sigmoid(X*theta))) - ((1-y)' * log(1 - sigmoid(X*theta)))) + (lambda/(2*m))*sum(theta(2:length(theta)) .* theta(2:length(theta)));
+J = (1/m) * sum((-y' * log(sigmoid(X*theta))) - ((1-y)' * log(1 - sigmoid(X*theta)))) + (lambda/(2*m))*sum(theta(2:end) .* theta(2:end));
 
 % Do not regularize the parameter θ(0)
 grad = (1/m) * sum(X .* repmat((sigmoid(X*theta) - y), 1, size(X, 2)));
@@ -26,7 +26,7 @@ grad = (1/m) * sum(X .* repmat((sigmoid(X*theta) - y), 1, size(X, 2)));
 % ^^ this results in a 1x28 dimensional matrix (a gradient for each feature)
 
 % Regularize starting at index 2
-grad(:, 2:length(grad)) = grad(:,2:length(grad)) + (lambda/m)*theta(2:length(theta))';
+grad(:, 2:end) = grad(:,2:end) + (lambda/m)*theta(2:end)';
 
 % =============================================================
 
