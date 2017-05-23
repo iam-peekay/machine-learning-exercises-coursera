@@ -46,7 +46,7 @@ grad = zeros(size(theta));
 % grad = 1 / m * (X' * (htheta - y) + lambda * temp);
 
 % advanced solution:
-% do regular matrix multiplication but take the transpose of y
+% do regular matrix multiplication by first taking the transpose of y
 J = (1/m) * sum((-y' * log(sigmoid(X*theta))) - ((1-y)' * log(1 - sigmoid(X*theta)))) + (lambda/(2*m))*sum(theta(2:end) .* theta(2:end));
 
 % Do not regularize the parameter θ(0)
