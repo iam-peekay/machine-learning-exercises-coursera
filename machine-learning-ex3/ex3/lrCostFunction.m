@@ -36,13 +36,24 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
+% simple soluton:
+% uses element-wise multiplication operation (.*) and the sum operation sum 
 
+% htheta = sigmoid(X * theta);
+% J = 1 / m * sum(-y .* log(htheta) - (1 - y) .* log(1 - htheta)) + lambda / (2 * m) * sum(theta(2:end) .^ 2);
+% temp = theta;
+% temp(1) = 0;
+% grad = 1 / m * (X' * (htheta - y) + lambda * temp);
 
+% advanced solution:
+% do regular matrix multiplication but take the transpose of y
+J = (1/m) * sum((-y' * log(sigmoid(X*theta))) - ((1-y)' * log(1 - sigmoid(X*theta)))) + (lambda/(2*m))*sum(theta(2:end) .* theta(2:end));
 
+% Do not regularize the parameter θ(0)
+grad = (1/m) * sum(X .* repmat((sigmoid(X*theta) - y), 1, size(X, 2)));
 
-
-
-
+% Regularize starting at index 2
+grad(:,2:end) = grad(:,2:end) + (lambda/m)*theta(2:end)';
 
 
 % =============================================================
