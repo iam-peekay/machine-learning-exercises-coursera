@@ -90,12 +90,15 @@ J_2 = J / m;
 % using vectorized
 J = (1/m) * sum(sum(-1 * yVec .* log(hThetaX) - (1 - yVec) .* log(1 - hThetaX)));
 
+% add regularization to the cost
 regularization = (lambda/(2*m)) * (sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)));
 
 J = J + regularization;
 
 
+% Part 2
 
+% first implement the sigmoid gradient function
 
 
 
