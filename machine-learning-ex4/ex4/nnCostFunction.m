@@ -124,8 +124,8 @@ for t = 1:m
   % No need for delta_1 since we do not need to get error for input layer
 
   % Accumulate the gradient from this example
-  Theta1_grad = Theta1_grad + delta_2 * a1';
-	Theta2_grad = Theta2_grad + delta_3 * a2';
+  Theta1_grad = Theta1_grad + delta_2 * a1' + (lambda/m)*[zeros(size(Theta1, 1), 1) Theta1(:,2:end)];
+	Theta2_grad = Theta2_grad + delta_3 * a2' + (lambda/m)*[zeros(size(Theta2, 1), 1) Theta2(:,2:end)];
 end
 
 % Obtain the (unregularized) gradient 
