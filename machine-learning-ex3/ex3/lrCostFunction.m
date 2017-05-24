@@ -40,21 +40,23 @@ grad = zeros(size(theta));
 % uses element-wise multiplication operation (.*) and the sum operation sum 
 
 % htheta = sigmoid(X * theta);
-% J = 1 / m * sum(-y .* log(htheta) - (1 - y) .* log(1 - htheta)) + lambda / (2 * m) * sum(theta(2:end) .^ 2);
+% J_2 = 1 / m * sum(-y .* log(htheta) - (1 - y) .* log(1 - htheta)) + lambda / (2 * m) * sum(theta(2:end) .^ 2);
 % temp = theta;
 % temp(1) = 0;
-% grad = 1 / m * (X' * (htheta - y) + lambda * temp);
+% grad_2 = 1 / m * (X' * (htheta - y) + lambda * temp);
 
 % advanced solution:
 % do regular matrix multiplication by first taking the transpose of y
 J = (1/m) * sum((-y' * log(sigmoid(X*theta))) - ((1-y)' * log(1 - sigmoid(X*theta)))) + (lambda/(2*m))*sum(theta(2:end) .* theta(2:end));
 
 % Do not regularize the parameter θ(0)
+% X = 5000 x 401 vector
+% repmat 5000 x 1 vector by size(x, 2) = 5000 x 401 vector
+% grad = 1 x 401 vector
 grad = (1/m) * sum(X .* repmat((sigmoid(X*theta) - y), 1, size(X, 2)));
 
 % Regularize starting at index 2
 grad(:,2:end) = grad(:,2:end) + (lambda/m)*theta(2:end)';
-
 
 % =============================================================
 

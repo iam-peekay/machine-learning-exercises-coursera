@@ -30,11 +30,14 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
+% all_theta is a 10 x 401 matrix
+% so htheta will be a (5000 x 401) x (10 x 401)' = 5000 x 10 matrix (1 row for each example, with 10 class predictions)
 htheta = X * all_theta';
+
+% we then take the max in each of the 5000 rows from the 10 class values in each row
 [temp, p] = max(htheta, [], 2);
 
-
-
+fprintf('\n size of max: %f',  size(max(htheta, [], 2)));
 
 
 % =========================================================================
