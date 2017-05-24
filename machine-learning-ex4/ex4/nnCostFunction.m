@@ -98,17 +98,39 @@ J = J + regularization;
 
 % Part 2
 
-% first implement the sigmoid gradient function
+for t = 1:m
+  % Set the input layer’s values (a(1)) to the t-th training example x(t)
+  a1 = [1; X(t,:)'];
 
+  % For hidden layers
+  z2 = Theta1 * a1;
+  a2 = [1; sigmoid(z2)];
 
+  z3 = Theta2 * a2;
+  a3 = sigmoid(z3);
 
+  % Indicates whether the current training example belongs to class k (yk = 1), 
+  % or if it belongs to a different class (yk = 0)
+  yk = ([1:num_labels]==y(t))';
 
+  % delta for output layet
+  delta_3 = a3 - yk;
 
+  % delta for hidden layer 2
+  delta_2 = (Theta2' * delta_3) .* [1; sigmoidGradient(z2)];
+  % Remove the bias row
+  delta_2 = delta_2(2:end); 
 
+  % No need for delta_1 since we do not need to get error for input layer
 
-% -------------------------------------------------------------
+  % Accumulate the gradient from this example
+  Theta1_grad = Theta1_grad + delta_2 * a1';
+	Theta2_grad = Theta2_grad + delta_3 * a2';
+end
 
-% =========================================================================
+% Obtain the (unregularized) gradient 
+Theta1_grad = (1/m) * Theta1_grad 
+Theta2_grad = (1/m) * Theta2_grad
 
 % Unroll gradients
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
