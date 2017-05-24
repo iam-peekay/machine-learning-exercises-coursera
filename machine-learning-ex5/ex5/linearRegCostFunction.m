@@ -21,9 +21,7 @@ grad = zeros(size(theta));
 
 
 
-
-
-
+J = (1/(2*m)) * sum(power((X*theta - y), 2)) + (lambda/(2*m)) * sum(power(theta(2:end), 2));
 
 
 
