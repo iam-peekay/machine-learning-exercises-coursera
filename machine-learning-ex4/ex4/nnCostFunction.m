@@ -100,28 +100,32 @@ J = J + regularization;
 
 for t = 1:m
   % Set the input layer’s values (a(1)) to the t-th training example x(t)
-  a1 = [1; X(t,:)'];
+  a1 = [1; X(t,:)']; % a1 is a 401x1 vector, Theta1 is a 25x401 vector
 
   % For hidden layers
-  z2 = Theta1 * a1;
-  a2 = [1; sigmoid(z2)];
+  z2 = Theta1 * a1; % This will be a 25 x 1 vector
 
-  z3 = Theta2 * a2;
-  a3 = sigmoid(z3);
+  a2 = [1; sigmoid(z2)];  % Add bias and now it's a 26x1 vector, while Theta2 which is a 10x26 vector
+  
+  z3 = Theta2 * a2; % z3 is now a 10x1 vector
+  a3 = sigmoid(z3);  % a3 is now a 10x1 vector
 
   % Indicates whether the current training example belongs to class k (yk = 1), 
   % or if it belongs to a different class (yk = 0)
-  yk = ([1:num_labels]==y(t))';
+  yk = ([1:num_labels]==y(t))';  % size of y is 5000x1 and size of yk is 10x1
 
-  % delta for output layet
-  delta_3 = a3 - yk;
+  % delta for output layer
+  delta_3 = a3 - yk; % delta_3 is a 10x1 vector
 
   % delta for hidden layer 2
-  delta_2 = (Theta2' * delta_3) .* [1; sigmoidGradient(z2)];
+  delta_2 = (Theta2' * delta_3) .* [1; sigmoidGradient(z2)]; % delta_2 is now a 26x1 vector
+  % fprintf('\nsize of delta_2: %f', size(delta_2));
+  % fprintf('\nsize of Theta2: %f', size(Theta2));
+
   % Remove the bias row
   delta_2 = delta_2(2:end); 
 
-  % No need for delta_1 since we do not need to get error for input layer
+  % NOTE: No need for delta_1 since we do not need to get error for input layer
 
   % Accumulate the gradient from this example
   % Second part of equation after '+' is regularization
