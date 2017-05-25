@@ -22,12 +22,17 @@ idx = zeros(size(X,1), 1);
 %
 
 
+m = size(X, 1);
 
+for i = 1:m 
+  distances = zeros(1,K);
 
-
-
-
-% =============================================================
-
+  for j = 1:K
+    distances(1, j) = sqrt(sum(power((X(i,:) - centroids(j,:)), 2)));
+  end 
+  
+  fprintf('\n distances size 2q: %f', size(distances));
+  [dist, dist_idx] = min(distances);
+  idx(i, 1) = dist_idx;
 end
 
