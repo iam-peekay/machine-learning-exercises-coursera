@@ -26,15 +26,15 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
+% size of idx is 300 x 1 or m x 1
+% size of centroids in this case is 3 x 2 (K x n)
+for i = 1:K
+  centroid_i = i == idx; % centroid_i is m x 1 matrix
 
+  num_i = sum(centroid_i);
+  centroid_i_matrix = repmat(centroid_i, 1, n); % centroid_i_matrix is m x n matrix
 
-
-
-
-
-
-% =============================================================
-
-
+  X_centroid_i = X .* centroid_i_matrix; % X_centroid_i is also an m x n since we do element wise multiplication
+  centroids(i, :) = sum(X_centroid_i) / num_i;
 end
 

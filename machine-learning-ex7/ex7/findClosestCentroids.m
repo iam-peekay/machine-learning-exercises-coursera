@@ -31,7 +31,6 @@ for i = 1:m
     distances(1, j) = sqrt(sum(power((X(i,:) - centroids(j,:)), 2)));
   end 
   
-  fprintf('\n distances size 2q: %f', size(distances));
   [dist, dist_idx] = min(distances);
   idx(i, 1) = dist_idx;
 end
