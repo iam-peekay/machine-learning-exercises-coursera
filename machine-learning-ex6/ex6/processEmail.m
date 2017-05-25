@@ -98,15 +98,11 @@ while ~isempty(email_contents)
     %
 
 
-
-
-
-
-
-
-
-
-    % =============================================================
+    % Check if word exists in vocab list, get the index of that word with vocab list
+    index = strmatch(str, vocabList, 'exact');
+    % If it exists, add the index to word indices array
+    if ~isempty(index)
+    word_indices = [word_indices; index];
 
 
     % Print to screen, ensuring that the output lines are not too long

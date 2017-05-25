@@ -48,14 +48,11 @@ x = zeros(n, 1);
 %
 %
 
-
-
-
-
-
-
-
-% =========================================================================
+  % Loop through each item in word_indices vector and set that index value to 1 in 
+  % our output vector
+  for i=1:size(word_indices)
+    x(word_indices) = 1;
+  end
     
 
 end

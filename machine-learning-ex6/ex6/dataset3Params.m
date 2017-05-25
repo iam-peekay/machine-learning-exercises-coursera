@@ -27,9 +27,9 @@ sigma = 0.3;
 results = eye(64, 3);
 row = 0;
 
-% test values for C and sigma
-for C_test = [0.01 0.03 0.1 0.3 1, 3, 10 30]
-    for sigma_test = [0.01 0.03 0.1 0.3 1, 3, 10 30]
+% test values for C and sigma (64 combinations)
+for C_test = [0.01 0.03 0.1 0.3 1 3 10 30]
+    for sigma_test = [0.01 0.03 0.1 0.3 1 3 10 30]
         row = row + 1;
         model = svmTrain(X, y, C_test, @(x1, x2) gaussianKernel(x1, x2, sigma_test));
         predictions = svmPredict(model, Xval);
@@ -43,6 +43,6 @@ end
 sorted_results = sortrows(results, 3); 
 
 C = sorted_results(1, 1);
-sigma = sorted_result(1, 2);
+sigma = sorted_results(1, 2);
 
 end
