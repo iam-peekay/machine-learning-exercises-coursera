@@ -29,8 +29,8 @@ z3 = a2 * Theta2';
 a3 = sigmoid(z3);
 [val, index] = max(a3, [], 2);
 
+% the index represents a value between 1..K for which we are classifying this p as
 p = index;
-% =========================================================================
 
 
 end

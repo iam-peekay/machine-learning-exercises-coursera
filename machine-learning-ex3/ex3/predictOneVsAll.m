@@ -36,11 +36,10 @@ X = [ones(m, 1) X];
 htheta = X * all_theta';
 
 % we then take the max in each of the 5000 rows from the 10 class values in each row
-[temp, p] = max(htheta, [], 2);
+
+% the second value is the index, which represents a value between 1..K for which we are classifying this p as
+[val, p] = max(htheta, [], 2);
 
 fprintf('\n size of max: %f',  size(max(htheta, [], 2)));
-
-
-% =========================================================================
 
 end
