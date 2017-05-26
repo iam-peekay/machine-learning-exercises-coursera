@@ -12,7 +12,4 @@ g = zeros(size(z));
 % Note: need to use element-wise division since z can be matrix, vector or scalar :)
 g = 1 ./ (1 + exp(-z));
 
-
-% =============================================================
-
 end

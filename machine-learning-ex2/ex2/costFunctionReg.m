@@ -20,14 +20,13 @@ grad = zeros(size(theta));
 
 J = (1/m) * sum((-y' * log(sigmoid(X*theta))) - ((1-y)' * log(1 - sigmoid(X*theta)))) + (lambda/(2*m))*sum(theta(2:end) .* theta(2:end));
 
+fprintf('size: %f', size(J));
 % Do not regularize the parameter θ(0)
-grad = (1/m) * sum(X .* repmat((sigmoid(X*theta) - y), 1, size(X, 2)));
+grad = (1/m) * sum(X .* repmat((sigmoid(X*theta) - y), 1, size(X, 2))); 
+% grad is a 1x28 dimensional matrix (a gradient for each feature)
 
-% ^^ this results in a 1x28 dimensional matrix (a gradient for each feature)
-
-% Regularize starting at index 2
+fprintf('size 2: %f', size(grad));
+% Regularize only starting at index 2
 grad(:, 2:end) = grad(:,2:end) + (lambda/m)*theta(2:end)';
-
-% =============================================================
 
 end
