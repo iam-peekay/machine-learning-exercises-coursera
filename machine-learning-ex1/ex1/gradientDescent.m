@@ -23,15 +23,14 @@ for iter = 1:num_iters
     % theta1 = theta(2) - alpha / m * sum((htheta - y) .* X(:,2)); 
     % theta = [theta0; theta1];
     
-    % advanced solution:
-    delta = (1/m)*sum(X.*repmat((X*theta - y), 1, size(X,2)));
+    % advanced vectorized solution:
+
+    % X is a 97 x 2 matrix
+    % y is a 97 x 1 matrix
+    % theta is a 2 x 1 matrix
+    delta = (1/m) * sum(X .* repmat((X*theta - y), 1, size(X,2)));
     
     theta = (theta' - (alpha*delta))';
-
-
-
-    % ============================================================
-
     % Save the cost J in every iteration    
     J_history(iter) = computeCost(X, y, theta);
 

@@ -26,14 +26,9 @@ for iter = 1:num_iters
     % theta = theta_tmp;
     
     % advanced solution:
-    delta = (1/m)*sum(X.*repmat((X*theta - y), 1, size(X,2)));
+    delta = (1/m) * sum(X .* repmat((X*theta - y), 1, size(X,2)));
     
     theta = (theta' - (alpha * delta))';
-
-
-
-
-    % ============================================================
 
     % Save the cost J in every iteration    
     J_history(iter) = computeCostMulti(X, y, theta);
