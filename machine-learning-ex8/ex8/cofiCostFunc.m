@@ -40,22 +40,10 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-% =============================================================
+% X is a m x n matrix
+% Theta is a u x n
+J_all = ((X * Theta') - Y).^2; % m x u matrix
+J = (1/2) * sum(J_all(R==1));
 
 grad = [X_grad(:); Theta_grad(:)];
 
