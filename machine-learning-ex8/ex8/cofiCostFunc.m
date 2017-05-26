@@ -42,8 +42,12 @@ Theta_grad = zeros(size(Theta));
 
 % X is a m x n matrix
 % Theta is a u x n
-J_all = ((X * Theta') - Y).^2; % m x u matrix
-J = (1/2) * sum(J_all(R==1));
+J_all = ((X * Theta') - Y).^2; % X * Theta' is an m x u matrix and so J_all is an m x u matrix
+J = (1/2) * sum(J_all(R==1)) + (lambda/2) * sum(sum(Theta.^2)) + (lambda/2) * sum(sum(X.^2));
+
+% Y is an m x u matrix
+X_grad = ((X * Theta' - Y) .* R) * Theta; % X_grad is an m x u matrix
+Theta_grad = ((X * Theta' - Y) .* R)' * X; % Theta_grad is an u x n matrix
 
 grad = [X_grad(:); Theta_grad(:)];
 
