@@ -30,8 +30,6 @@ J = (1/(2*m)) * sum(power((X*theta - y), 2)) + (lambda/(2*m)) * sum(power(theta(
 grad = (1/m) .* X' * (X*theta - y);
 grad(2:size(theta)) = grad(2:size(theta)) + (lambda/m) * theta(2:size(theta));
 
-% =========================================================================
-
 grad = grad(:);
 
 end

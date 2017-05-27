@@ -6,7 +6,7 @@ function numgrad = computeNumericalGradient(J, theta)
 %   return the function value at theta.
 
 % Notes: The following code implements numerical gradient checking, and 
-%        returns the numerical gradient.It sets numgrad(i) to (a numerical 
+%        returns the numerical gradient. It sets numgrad(i) to (a numerical 
 %        approximation of) the partial derivative of J with respect to the 
 %        i-th input argument, evaluated at theta. (i.e., numgrad(i) should 
 %        be the (approximately) the partial derivative of J with respect 

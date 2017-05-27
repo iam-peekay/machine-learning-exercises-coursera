@@ -63,22 +63,26 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 % Part 1
-a1 = [ones(m, 1), X];
-z2 = a1 * Theta1';
+% X is a 5000x400 matrix
+% Theta1 has size 25 x 401
+% Theta2 has size 10 x 26
+a1 = [ones(m, 1), X]; % 5000 x 401 matrix
+z2 = a1 * Theta1'; % 5000 x 25 matrix
 a2 = sigmoid(z2);
-a2 = [ones(size(a2, 1), 1), a2];
-z3 = a2 * Theta2';
+a2 = [ones(size(a2, 1), 1), a2]; % 5000 x 26 matrix
+z3 = a2 * Theta2'; % 5000 x 10 matrix
 a3 = sigmoid(z3);
 
-hThetaX = a3;
+hThetaX = a3; % 5000 x 10 matrix
 
-yVec = zeros(m, num_labels);
+yVec = zeros(m, num_labels); % 5000 x 10 matrix
 
 for i = 1:m
   yVec(i, y(i)) = 1;
 end; 
 
 % using for-loop
+
 for i = 1:m
     term1 = -yVec(i,:) .* log(hThetaX(i,:));
     term2 = (ones(1,num_labels) - yVec(i,:)) .* log(ones(1,num_labels) - hThetaX(i,:));
@@ -105,7 +109,7 @@ for t = 1:m
   % For hidden layers
   z2 = Theta1 * a1; % This will be a 25 x 1 vector
 
-  a2 = [1; sigmoid(z2)];  % Add bias and now it's a 26x1 vector, while Theta2 which is a 10x26 vector
+  a2 = [1; sigmoid(z2)];  % Add bias row, so a2 is a 26x1 vector, while Theta2 is a 10x26 vector
   
   z3 = Theta2 * a2; % z3 is now a 10x1 vector
   a3 = sigmoid(z3);  % a3 is now a 10x1 vector
@@ -123,7 +127,7 @@ for t = 1:m
   % fprintf('\nsize of Theta2: %f', size(Theta2));
 
   % Remove the bias row
-  delta_2 = delta_2(2:end); 
+  delta_2 = delta_2(2:end); % 25 x 1 matrix
 
   % NOTE: No need for delta_1 since we do not need to get error for input layer
 
